@@ -18,10 +18,10 @@ const BottomNav: React.FC = () => {
         <span className={`material-symbols-outlined text-[28px] transition-transform group-active:scale-90 ${isActive('/saved') ? 'text-primary filled' : 'text-text-secondary'}`}>favorite</span>
         <span className={`text-[10px] font-medium ${isActive('/saved') ? 'text-primary' : 'text-text-secondary'}`}>Saved</span>
       </Link>
-      <button className="group flex flex-col items-center gap-1 p-2 w-16">
-        <span className="material-symbols-outlined text-text-secondary group-hover:text-white text-[28px] transition-colors group-active:scale-90">settings</span>
-        <span className="text-[10px] font-medium text-text-secondary group-hover:text-white">Settings</span>
-      </button>
+      <Link to="/settings" className="group flex flex-col items-center gap-1 p-2 w-16">
+        <span className={`material-symbols-outlined text-[28px] transition-transform group-active:scale-90 ${isActive('/settings') ? 'text-primary filled' : 'text-text-secondary'}`}>settings</span>
+        <span className={`text-[10px] font-medium ${isActive('/settings') ? 'text-primary' : 'text-text-secondary'}`}>Settings</span>
+      </Link>
     </nav>
   );
 };

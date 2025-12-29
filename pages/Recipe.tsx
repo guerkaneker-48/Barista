@@ -2,12 +2,14 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { coffees } from '../data/coffees';
 import { useFavorites } from '../context/FavoritesContext';
+import { useSettings } from '../context/SettingsContext';
 import BrewTimer from '../components/BrewTimer';
 
 const Recipe: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const coffee = coffees.find(c => c.id === id);
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { tempUnit } = useSettings();
   const [isTimerOpen, setIsTimerOpen] = useState(false);
   const [showShareFeedback, setShowShareFeedback] = useState(false);
 
@@ -43,6 +45,18 @@ const Recipe: React.FC = () => {
         return Math.min(Math.max(val, 0), 100);
     }
     return 95; // Default
+  };
+
+  const formatTemperatureDisplay = (tempStr: string) => {
+    if (!tempStr.includes('/')) return tempStr;
+    const parts = tempStr.split('/');
+    if (parts.length < 2) return tempStr;
+
+    // Assuming format is always "C / F" based on data
+    const cPart = parts[0].trim();
+    const fPart = parts[1].trim();
+
+    return tempUnit === 'C' ? cPart : fPart;
   };
 
   const getStepIcon = (title: string) => {
@@ -249,7 +263,7 @@ const Recipe: React.FC = () => {
                            <span className="material-symbols-outlined">thermostat</span>
                            <span className="font-bold text-sm uppercase tracking-wider">Water Temp</span>
                        </div>
-                       <span className="text-lg font-bold text-gray-900 dark:text-white">{coffee.brewingDetails.temperature}</span>
+                       <span className="text-lg font-bold text-gray-900 dark:text-white">{formatTemperatureDisplay(coffee.brewingDetails.temperature)}</span>
                    </div>
                    <div className="relative h-3 w-full bg-white/60 dark:bg-white/10 rounded-full overflow-hidden">
                        <div 
