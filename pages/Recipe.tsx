@@ -59,25 +59,6 @@ const Recipe: React.FC = () => {
     return tempUnit === 'C' ? cPart : fPart;
   };
 
-  const getStepIcon = (title: string) => {
-    const t = title.toLowerCase();
-    if (t.includes('grind')) return 'grain';
-    if (t.includes('tamp')) return 'vertical_align_bottom';
-    if (t.includes('extract') || t.includes('brew')) return 'coffee_maker';
-    if (t.includes('steam')) return 'air';
-    if (t.includes('heat') || t.includes('boil')) return 'thermostat';
-    if (t.includes('pour') || t.includes('add') || t.includes('water')) return 'water_drop';
-    if (t.includes('layer')) return 'layers';
-    if (t.includes('mix') || t.includes('stir') || t.includes('combine')) return 'blender';
-    if (t.includes('serve') || t.includes('enjoy') || t.includes('finish')) return 'local_cafe';
-    if (t.includes('steep') || t.includes('wait')) return 'hourglass_top';
-    if (t.includes('strain') || t.includes('filter')) return 'filter_alt';
-    if (t.includes('ice') || t.includes('cool')) return 'ac_unit';
-    if (t.includes('prepare')) return 'checklist';
-    if (t.includes('mark')) return 'edit';
-    return 'circle';
-  };
-
   const getFlavorColorClass = (note: string) => {
     const n = note.toLowerCase();
     if (n.includes('chocolate') || n.includes('cocoa') || n.includes('toffee')) return 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-200 border-amber-200 dark:border-amber-800';
@@ -395,10 +376,10 @@ const Recipe: React.FC = () => {
             <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Preparation</h2>
             <div className="relative pl-4 space-y-8 before:absolute before:inset-y-0 before:left-[19px] before:w-0.5 before:bg-gray-200 dark:before:bg-white/10">
                 {coffee.steps.map((step, idx) => (
-                    <div key={idx} className="relative pl-8 group">
+                    <div key={idx} className="relative pl-14 group">
                         <div className="absolute left-0 top-0 size-10 rounded-full bg-background-light dark:bg-background-dark border-2 border-gray-300 dark:border-white/20 flex items-center justify-center z-10 group-hover:border-primary group-hover:text-primary transition-all">
-                            <span className="material-symbols-outlined text-[20px] text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">
-                                {getStepIcon(step.title)}
+                            <span className="font-bold text-sm text-gray-500 dark:text-gray-400 group-hover:text-primary transition-colors">
+                                {idx + 1}
                             </span>
                         </div>
                         <div>
